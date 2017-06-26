@@ -144,17 +144,10 @@ namespace Discord.Addons.Paginator
                 var builder = new EmbedBuilder()
                     .WithColor(embedColor ?? Color.Default)
                     .WithTitle(title)
-                    .WithDescription(page?.Description ?? "");
-                if (page?.ImageUrl != null)
-                {
-                    builder.WithImageUrl(new Uri(page.ImageUrl));
-                }
-                if (page?.ThumbnailUrl != null)
-                {
-                    builder.WithThumbnailUrl(new Uri(page.ThumbnailUrl));
-                }
-
-                builder.WithFooter(footer =>
+                    .WithDescription(page?.Description ?? "")
+                    .WithImageUrl(page?.ImageUrl)
+                    .WithThumbnailUrl(page.ThumbnailUrl)
+                    .WithFooter(footer =>
                     {
                         footer.Text = $"Page {i++}/{pages.Count()}";
                     });
@@ -211,7 +204,7 @@ namespace Discord.Addons.Paginator
     {
         public IReadOnlyCollection<EmbedFieldBuilder> Fields { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
-        public string ThumbnailUrl { get; set; }
+        public Uri ImageUrl { get; set; }
+        public Uri ThumbnailUrl { get; set; }
     }
 }
